@@ -34,23 +34,29 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room entradaPueblo, plazaPueblo, granjaOvejas, abrevadero, posada, habitacionPosadero, castillo, habitacionRey;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        entradaPueblo = new Room("at the entrance of the Goldshire village");
+        plazaPueblo = new Room("in the main square of the village");
+        granjaOvejas = new Room("in the sheep's farm. Why u seek the king here?");
+        abrevadero = new Room("in the trough. There's only sheeps and water...");
+        posada = new Room("in the inn. Lot of beer and food.");
+        habitacionPosadero = new Room("in the inn's rooms. Some drunk guys and some suggestive women");
+        castillo = new Room("in the castle. 'Maybe' the king is here");
+        habitacionRey = new Room("in the king's room. There's the king, finally! YOU WIN THE GAME!!!");
         
         // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        entradaPueblo.setExits(plazaPueblo, null, null, null);
+        plazaPueblo.setExits(castillo, posada, entradaPueblo, granjaOvejas);
+        granjaOvejas.setExits(null, plazaPueblo, abrevadero, null);
+        abrevadero.setExits(granjaOvejas, null, null, null);
+        posada.setExits(habitacionPosadero, null, null, plazaPueblo);
+        habitacionPosadero.setExits(null, null, posada, null);
+        castillo.setExits(habitacionRey, null, plazaPueblo, null);
+        habitacionRey.setExits(null, null, null, null);
 
-        currentRoom = outside;  // start game outside
+        currentRoom = entradaPueblo;  // start game outside
     }
 
     /**
@@ -77,8 +83,7 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to Goldshire village!");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println("You are " + currentRoom.getDescription());
@@ -135,8 +140,8 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("You must hurry, The King need it's message");
+        System.out.println("as fast as u can.");
         System.out.println();
         System.out.println("Your command words are:");
         System.out.println("   go quit help");
