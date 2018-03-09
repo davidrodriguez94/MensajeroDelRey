@@ -34,27 +34,30 @@ public class Game
      */
     private void createRooms()
     {
-        Room entradaPueblo, plazaPueblo, granjaOvejas, abrevadero, posada, habitacionPosadero, castillo, habitacionRey;
+        Room entradaPueblo, plazaPueblo, granjaOvejas, abrevadero, pocilga, posada, baños, habitacionPosadero, castillo, habitacionRey;
 
         // create the rooms
         entradaPueblo = new Room("at the entrance of the Goldshire village");
         plazaPueblo = new Room("in the main square of the village");
         granjaOvejas = new Room("in the sheep's farm. Why u seek the king here?");
+        pocilga = new Room ("in the pigsty. U fall down and pigs eats u. U LOSE!!");
         abrevadero = new Room("in the trough. There's only sheeps and water...");
         posada = new Room("in the inn. Lot of beer and food.");
+        baños = new Room ("in the bathroom of the inn. A strange wont let u go. U LOSE!!");
         habitacionPosadero = new Room("in the inn's rooms. Some drunk guys and some suggestive women");
         castillo = new Room("in the castle. 'Maybe' the king is here");
         habitacionRey = new Room("in the king's room. There's the king, finally! YOU WIN THE GAME!!!");
 
         // initialise room exits
-        entradaPueblo.setExits(plazaPueblo, null, null, null);
-        plazaPueblo.setExits(castillo, posada, entradaPueblo, granjaOvejas);
-        granjaOvejas.setExits(null, plazaPueblo, abrevadero, null);
-        abrevadero.setExits(granjaOvejas, null, null, null);
-        posada.setExits(habitacionPosadero, null, null, plazaPueblo);
-        habitacionPosadero.setExits(null, null, posada, null);
-        castillo.setExits(habitacionRey, null, plazaPueblo, null);
-        habitacionRey.setExits(null, null, null, null);
+        entradaPueblo.setExits(plazaPueblo, null, null, null, null);
+        plazaPueblo.setExits(castillo, posada, entradaPueblo, granjaOvejas, null);
+        granjaOvejas.setExits(null, plazaPueblo, abrevadero, null, pocilga);
+        abrevadero.setExits(granjaOvejas, null, null, null, null);
+        posada.setExits(habitacionPosadero, null, null, plazaPueblo, baños);
+        baños.setExits(null, null, null, null, null);
+        habitacionPosadero.setExits(null, null, posada, null, null);
+        castillo.setExits(habitacionRey, null, plazaPueblo, null, null);
+        habitacionRey.setExits(null, null, castillo, null, null);
 
         currentRoom = entradaPueblo;  // start game outside
     }
@@ -161,7 +164,9 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
-
+        if(direction.equals("southeast")){
+            nextRoom = currentRoom.southEastExit;
+        }
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -205,6 +210,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("west ");
+        }
+        if(currentRoom.southEastExit != null){
+            System.out.println("southeast ");
         }
         System.out.println();
     }
