@@ -14,12 +14,13 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southEastExit;
+    private String exitDirection;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -60,6 +61,59 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+    
+    /**
+     * Return the exists of the current room.
+     * @return The exits of the current room
+     */
+    public Room getExit(String exitDirection)
+    {
+        Room roomToReturn = null;
+        if(exitDirection.equals("north")){
+            roomToReturn = northExit;
+        }
+        if(exitDirection.equals("south")){
+            roomToReturn = southExit;
+        }
+        if(exitDirection.equals("east")){
+            roomToReturn = eastExit;
+        }
+        if(exitDirection.equals("west")){
+            roomToReturn = westExit;
+        }
+        if(exitDirection.equals("southeast")){
+            roomToReturn = southEastExit;
+        }
+        return roomToReturn;
+    }
+
+    /**
+     * Return a description of the room's exits.
+     * Example: "Exists: north east west"
+     * @return The description of the room's exits
+     */
+    public String getExitString()
+    {
+        String existDescription = "Exists: ";
+        
+        if(northExit != null){
+            existDescription += "north ";
+        }
+        if(southExit != null){
+            existDescription += "south ";
+        }
+        if(eastExit != null){
+            existDescription += "east ";
+        }
+        if(westExit != null){
+            existDescription += "west ";
+        }
+        if(southEastExit != null){
+            existDescription += "southeast ";
+        }
+        
+        return existDescription;
     }
 
 }
