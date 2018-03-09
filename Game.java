@@ -49,16 +49,16 @@ public class Game
         habitacionRey = new Room("in the king's room. There's the king, finally! YOU WIN THE GAME!!!");
 
         // initialise room exits
-        entradaPueblo.setExits(plazaPueblo, null, null, null, null);
-        plazaPueblo.setExits(castillo, posada, entradaPueblo, granjaOvejas, null);
-        granjaOvejas.setExits(null, plazaPueblo, abrevadero, null, pocilga);
-        abrevadero.setExits(granjaOvejas, null, null, null, null);
-        posada.setExits(habitacionPosadero, null, null, plazaPueblo, baños);
-        baños.setExits(null, null, null, null, null);
-        habitacionPosadero.setExits(null, null, posada, null, null);
-        castillo.setExits(habitacionRey, null, plazaPueblo, null, null);
-        habitacionRey.setExits(null, null, castillo, null, null);
-
+        entradaPueblo.setExits(plazaPueblo, null, null, null, null, null);
+        plazaPueblo.setExits(castillo, posada, entradaPueblo, granjaOvejas, null, null);
+        granjaOvejas.setExits(null, plazaPueblo, abrevadero, null, pocilga, null);
+        abrevadero.setExits(granjaOvejas, null, null, null, null, null);
+        posada.setExits(habitacionPosadero, null, null, plazaPueblo, baños, null);
+        baños.setExits(null, null, null, null, null, null);
+        habitacionPosadero.setExits(null, null, posada, null, null, castillo);
+        castillo.setExits(habitacionRey, null, plazaPueblo, null, null,null);
+        habitacionRey.setExits(null, null, null, null, null, null);
+ 
         currentRoom = entradaPueblo;  // start game outside
     }
 

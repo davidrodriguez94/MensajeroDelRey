@@ -20,6 +20,7 @@ public class Room
     private Room eastExit;
     private Room westExit;
     private Room southEastExit;
+    private Room northEastExit;
     private String exitDirection;
     /**
      * Create a room described "description". Initially, it has
@@ -40,8 +41,9 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      * @param southEast The southeast exit.
+     * @param northEast The northeast exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west, Room southEast) 
+    public void setExits(Room north, Room east, Room south, Room west, Room southEast, Room northEast) 
     {
         if(north != null)
             northExit = north;
@@ -53,6 +55,8 @@ public class Room
             westExit = west;
         if(southEast != null)
             southEastExit = southEast;
+        if(northEast != null)
+            northEastExit = northEast;
     }
 
     /**
@@ -85,6 +89,9 @@ public class Room
         if(exitDirection.equals("southeast")){
             roomToReturn = southEastExit;
         }
+        if(exitDirection.equals("northeast")){
+            roomToReturn = northEastExit;
+        }
         return roomToReturn;
     }
 
@@ -95,25 +102,27 @@ public class Room
      */
     public String getExitString()
     {
-        String existDescription = "Exists: ";
+        String exitDescription = "Exists: ";
         
         if(northExit != null){
-            existDescription += "north ";
+            exitDescription += "north ";
         }
         if(southExit != null){
-            existDescription += "south ";
+            exitDescription += "south ";
         }
         if(eastExit != null){
-            existDescription += "east ";
+            exitDescription += "east ";
         }
         if(westExit != null){
-            existDescription += "west ";
+            exitDescription += "west ";
         }
         if(southEastExit != null){
-            existDescription += "southeast ";
+            exitDescription += "southeast ";
         }
-        
-        return existDescription;
+        if(northEastExit != null){
+            exitDescription += "northeast ";
+        }
+        return exitDescription;
     }
 
 }
