@@ -19,7 +19,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -40,7 +40,7 @@ public class Room
     public void setExits(String direction, Room nextRoom){
         exits.put(direction, nextRoom);
     }
-    
+
     /**
      * @return The description of the room.
      */
@@ -48,7 +48,7 @@ public class Room
     {
         return description;
     }
-    
+
     /**
      * Return the exists of the current room.
      * @return The exits of the current room
@@ -57,7 +57,7 @@ public class Room
     {
         return exits.get(direction);
     }
-  
+
     /**
      * Return a description of the room's exits.
      * Example: "Exists: north east west"
@@ -70,8 +70,18 @@ public class Room
         for(String direction: nameOfDirections){
             exitsDescription += direction + " ";
         }
-        
+
         return exitsDescription;
     }
 
+    /**
+     * Return a long description of this room, of the form:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return A description of the room, including exits.
+     */
+    public String getLongDescription()
+    {
+        return "You are " + description + ".\n" + getExitString();
+    }
 }
