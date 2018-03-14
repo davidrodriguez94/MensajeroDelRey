@@ -50,26 +50,26 @@ public class Game
 
         // initialise room exits
         entradaPueblo.setExits("north", plazaPueblo);
-        
+
         plazaPueblo.setExits("north", castillo);
         plazaPueblo.setExits("east", posada);
         plazaPueblo.setExits("west", granjaOvejas);
         plazaPueblo.setExits("south", entradaPueblo);
-        
+
         granjaOvejas.setExits("south", abrevadero);
         granjaOvejas.setExits("southeast", pocilga);
-        
+
         abrevadero.setExits("north", granjaOvejas);
-        
+
         posada.setExits("north", habitacionPosadero);
         posada.setExits("southeast", baños);
-        
+
         habitacionPosadero.setExits("northwest", castillo);
         habitacionPosadero.setExits("south", posada);
-        
+
         castillo.setExits("north", habitacionRey);
         castillo.setExits("south", plazaPueblo);
-        
+
         habitacionRey.setExits("south", castillo);
 
         currentRoom = entradaPueblo;  // start game outside
@@ -152,7 +152,7 @@ public class Game
         System.out.println("as fast as u can.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look eat");
+        parser.showCommands();
     }
 
     /** 
@@ -202,7 +202,7 @@ public class Game
     private void printLocationInfo()
     {
         System.out.println(currentRoom.getLongDescription());
-        
+
         System.out.println();
     }
 
@@ -213,7 +213,7 @@ public class Game
     {
         System.out.println(currentRoom.getLongDescription());
     }
-    
+
     /**
      * The player can eat
      */
@@ -222,4 +222,5 @@ public class Game
         System.out.println("You have eaten now and you are not hungry any more");
         System.out.println();
     }
+
 }
