@@ -18,6 +18,7 @@ import java.util.Set;
 public class Room 
 {
     private String description;
+    private Item item;
     private HashMap<String, Room> exits;
 
     /**
@@ -25,10 +26,12 @@ public class Room
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
+     * @param item The item
      */
-    public Room(String description) 
+    public Room(String description, Item item) 
     {
         this.description = description;
+        this.item = item;
         exits = new HashMap<>();
     }
 
@@ -76,12 +79,15 @@ public class Room
 
     /**
      * Return a long description of this room, of the form:
-     *     You are in the 'name of room'
-     *     Exits: north west southwest
+     * You are in the 'name of room'
+     * Exits: north west southwest
      * @return A description of the room, including exits.
      */
     public String getLongDescription()
     {
+        if(item != null){
+            System.out.println(item.getDescription());
+        }
         return "You are " + description + ".\n" + getExitString();
     }
 }
