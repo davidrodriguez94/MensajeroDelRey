@@ -152,6 +152,7 @@ public class Game
         System.out.println("as fast as u can.");
         System.out.println();
         System.out.println("Your command words are:");
+        System.out.println();
         parser.showCommands();
     }
 

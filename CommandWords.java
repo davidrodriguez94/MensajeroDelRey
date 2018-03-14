@@ -38,15 +38,17 @@ public class CommandWords
         // if we get here, the string was not found in the commands
         return false;
     }
-    
+
     /**
-     * Pritn the commands words
+     * Return the command list
      */
-    public void showAll()
+    public String getCommandList()
     {
+        String commandList = null;
         for (String command : validCommands) {
-            System.out.println(command + " ");
+            commandList = command;
+            System.out.println(commandList + " ");
         }
-        System.out.println();
+        return commandList;
     }
 }
