@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 
 /**
  * Class Room - a room in an adventure game.
@@ -20,6 +21,7 @@ public class Room
     private String description;
     private Item item;
     private HashMap<String, Room> exits;
+    private ArrayList<Item> items;
 
     /**
      * Create a room described "description". Initially, it has
@@ -28,11 +30,12 @@ public class Room
      * @param description The room's description.
      * @param item The item
      */
-    public Room(String description, Item item) 
+    public Room(String description) 
     {
         this.description = description;
         this.item = item;
         exits = new HashMap<>();
+        items = new ArrayList<>();
     }
 
     /**
@@ -55,6 +58,7 @@ public class Room
     /**
      * Return the exists of the current room.
      * @return The exits of the current room
+     * @param direction The possible direction
      */
     public Room getExit(String direction)
     {
@@ -78,6 +82,15 @@ public class Room
     }
 
     /**
+     * Add an item at the current room
+     * @param item The item we want to add
+     */
+    public void addItem(Item item)
+    {
+        items.add(item);
+    }
+
+    /**
      * Return a long description of this room, of the form:
      * You are in the 'name of room'
      * Exits: north west southwest
@@ -85,9 +98,12 @@ public class Room
      */
     public String getLongDescription()
     {
-        if(item != null){
-            System.out.println(item.getDescription());
+        String descripcionADevolver = "You are " + description + ".\n" + getExitString();
+        if(items != null){
+            for(Item item: items){
+                descripcionADevolver+=  "\n" + item.getDescriptionItems();
+            }
         }
-        return "You are " + description + ".\n" + getExitString();
+        return descripcionADevolver;
     }
 }

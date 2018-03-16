@@ -39,21 +39,21 @@ public class Game
         Item magicGoldenSword, crown, beer;
         
         // create the items
-        beer = new Item("Some delicious beers stand at the bar", 35);
-        magicGoldenSword = new Item("A magic golden sword stand near the throne", 15000);
-        crown = new Item("A full of gold and gems crown stand in a side table near the bed",80);
+        beer = new Item("some delicious beers stand at the bar", 35);
+        magicGoldenSword = new Item("a magic golden sword stand near the throne", 15000);
+        crown = new Item("a full of gold and gems crown stand in a side table near the bed",80);
         
         // create the rooms
-        entradaPueblo = new Room("at the entrance of the Goldshire village", null);
-        plazaPueblo = new Room("in the main square of the village", null);
-        granjaOvejas = new Room("in the sheep's farm. Why u seek the king here?", null);
-        pocilga = new Room ("in the pigsty. U fall down and pigs eats u. U LOSE!!", null);
-        abrevadero = new Room("in the trough. There's only sheeps and water...", null);
-        posada = new Room("in the inn. Lot of beer and food.", beer);
-        baños = new Room ("in the bathroom of the inn. A strange wont let u go. U LOSE!!", null);
-        habitacionPosadero = new Room("in the inn's rooms. Some drunk guys and some suggestive women", null);
-        castillo = new Room("in the castle. 'Maybe' the king is here", magicGoldenSword);
-        habitacionRey = new Room("in the king's room. There's the king, finally! YOU WIN THE GAME!!!", crown);
+        entradaPueblo = new Room("at the entrance of the Goldshire village");
+        plazaPueblo = new Room("in the main square of the village");
+        granjaOvejas = new Room("in the sheep's farm. Why u seek the king here?");
+        pocilga = new Room ("in the pigsty. U fall down and pigs eats u. U LOSE!!");
+        abrevadero = new Room("in the trough. There's only sheeps and water...");
+        posada = new Room("in the inn. Lot of beer and food.");
+        baños = new Room ("in the bathroom of the inn. A strange wont let u go. U LOSE!!");
+        habitacionPosadero = new Room("in the inn's rooms. Some drunk guys and some suggestive women");
+        castillo = new Room("in the castle. 'Maybe' the king is here");
+        habitacionRey = new Room("in the king's room. There's the king, finally! YOU WIN THE GAME!!!");
         
         
         // initialise room exits
@@ -73,15 +73,18 @@ public class Game
         posada.setExits("north", habitacionPosadero);
         posada.setExits("west", plazaPueblo);
         posada.setExits("southeast", baños);
+        posada.addItem(beer);
 
         habitacionPosadero.setExits("northwest", castillo);
         habitacionPosadero.setExits("south", posada);
 
         castillo.setExits("north", habitacionRey);
         castillo.setExits("south", plazaPueblo);
+        castillo.addItem(magicGoldenSword);
 
         habitacionRey.setExits("south", castillo);
-
+        habitacionRey.addItem(crown);
+        
         currentRoom = entradaPueblo;  // start game outside
     }
 

@@ -36,4 +36,13 @@ public class Item
     {
         return weight;
     }
+    
+    /**
+     * Return the description of the items
+     * @return The description of the items
+     */
+    public String getDescriptionItems()
+    {
+        return "The item is: " + description + " and their weight is " + weight;
+    }
 }
