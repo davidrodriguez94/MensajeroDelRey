@@ -20,6 +20,8 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Item item;
+    private Room lastRoom;
+    private boolean goBack;
 
     /**
      * Create the game and initialise its internal map.
@@ -28,6 +30,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        goBack = false;
     }
 
     /**
@@ -37,12 +40,12 @@ public class Game
     {
         Room entradaPueblo, plazaPueblo, granjaOvejas, abrevadero, pocilga, posada, baños, habitacionPosadero, castillo, habitacionRey;
         Item magicGoldenSword, crown, beer;
-        
+
         // create the items
         beer = new Item("some delicious beers stand at the bar", 35);
         magicGoldenSword = new Item("a magic golden sword stand near the throne", 15000);
         crown = new Item("a full of gold and gems crown stand in a side table near the bed",80);
-        
+
         // create the rooms
         entradaPueblo = new Room("at the entrance of the Goldshire village");
         plazaPueblo = new Room("in the main square of the village");
@@ -54,8 +57,7 @@ public class Game
         habitacionPosadero = new Room("in the inn's rooms. Some drunk guys and some suggestive women");
         castillo = new Room("in the castle. 'Maybe' the king is here");
         habitacionRey = new Room("in the king's room. There's the king, finally! YOU WIN THE GAME!!!");
-        
-        
+
         // initialise room exits
         entradaPueblo.setExits("north", plazaPueblo);
 
@@ -84,7 +86,7 @@ public class Game
 
         habitacionRey.setExits("south", castillo);
         habitacionRey.addItem(crown);
-        
+
         currentRoom = entradaPueblo;  // start game outside
     }
 
@@ -148,6 +150,9 @@ public class Game
         else if(commandWord.equals("eat")){
             eat();
         }
+        else if(commandWord.equals("back")){
+            back();
+        }
 
         return wantToQuit;
     }
@@ -189,7 +194,9 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
+            lastRoom = currentRoom;
+            currentRoom = currentRoom.getExit(direction);
+            goBack= true;
             printLocationInfo();
         }
     }
@@ -236,4 +243,18 @@ public class Game
         System.out.println();
     }
 
+    /**
+     * This method alow the player to back at the last room
+     */
+    public void back()
+    {
+        if(goBack){
+            goBack = false;
+            currentRoom = lastRoom;
+            printLocationInfo();
+        }
+        else{
+            System.out.println("U can't go back!!");
+        }
+    }
 }
